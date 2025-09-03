@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги - StarCargo</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1e3d59;
+            --secondary-color: #ff6b35;
+            --accent-color: #f5f0e1;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            padding-top: 76px;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 0;
+        }
+
+        .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: white;
+        }
+
+        .service-section {
+            padding: 80px 0;
+        }
+
+        .service-section:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+        }
+
+        .service-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-features i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            font-weight: 500;
+            padding: 12px 30px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #e55a2b;
+            border-color: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .service-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shipping-fast me-2"></i>StarCargo
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/services">Услуги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tracking">Отслеживание</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/quote">Расчет стоимости</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                    <li class="breadcrumb-item active">Услуги</li>
+                </ol>
+            </nav>
+            <h1 class="page-title">Наши услуги</h1>
+            <p class="lead">Полный спектр логистических решений для вашего бизнеса</p>
+        </div>
+    </section>
+
+    <!-- Road Transport -->
+    <section id="road" class="service-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-truck service-icon"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="service-title">Автомобильные перевозки</h2>
+                    <p class="lead">Наш автопарк состоит из более 50 грузовых автомобилей высокого экологического класса, оснащенных современным оборудованием.</p>
+                    
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>Тентовые и рефрижераторные полуприцепы</li>
+                        <li><i class="fas fa-check"></i>Грузоподъемность до 24 тонн</li>
+                        <li><i class="fas fa-check"></i>GPS-мониторинг всего парка</li>
+                        <li><i class="fas fa-check"></i>Квалифицированные водители</li>
+                        <li><i class="fas fa-check"></i>Страхование грузов</li>
+                        <li><i class="fas fa-check"></i>Соблюдение температурного режима</li>
+                    </ul>
+                    
+                    <a href="/quote" class="btn btn-primary mt-3">
+                        <i class="fas fa-calculator me-2"></i>Рассчитать стоимость
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Air Transport -->
+    <section id="air" class="service-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="text-center">
+                        <i class="fas fa-plane service-icon"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <h2 class="service-title">Авиаперевозки</h2>
+                    <p class="lead">Быстрая доставка срочных и ценных грузов авиатранспортом по всему миру с соблюдением всех международных стандартов.</p>
+                    
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>Экспресс-доставка до 24-48 часов</li>
+                        <li><i class="fas fa-check"></i>Перевозка опасных грузов</li>
+                        <li><i class="fas fa-check"></i>Температурно-контролируемые грузы</li>
+                        <li><i class="fas fa-check"></i>Документооборот и таможня</li>
+                        <li><i class="fas fa-check"></i>Страхование на полную стоимость</li>
+                        <li><i class="fas fa-check"></i>Отслеживание в реальном времени</li>
+                    </ul>
+                    
+                    <a href="/quote" class="btn btn-primary mt-3">
+                        <i class="fas fa-calculator me-2"></i>Рассчитать стоимость
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sea Transport -->
+    <section id="sea" class="service-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-ship service-icon"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="service-title">Морские перевозки</h2>
+                    <p class="lead">Контейнерные и навалочные перевозки морским транспортом для крупнотоннажных грузов по оптимальным тарифам.</p>
+                    
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>20' и 40' контейнеры FCL/LCL</li>
+                        <li><i class="fas fa-check"></i>Рефрижераторные контейнеры</li>
+                        <li><i class="fas fa-check"></i>Негабаритные и тяжеловесные грузы</li>
+                        <li><i class="fas fa-check"></i>Портовое экспедирование</li>
+                        <li><i class="fas fa-check"></i>Складские услуги в портах</li>
+                        <li><i class="fas fa-check"></i>Морское страхование</li>
+                    </ul>
+                    
+                    <a href="/quote" class="btn btn-primary mt-3">
+                        <i class="fas fa-calculator me-2"></i>Рассчитать стоимость
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rail Transport -->
+    <section id="rail" class="service-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="text-center">
+                        <i class="fas fa-train service-icon"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <h2 class="service-title">Железнодорожные перевозки</h2>
+                    <p class="lead">Надежные железнодорожные перевозки по всей территории СНГ и Европы с оптимальными сроками доставки.</p>
+                    
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>Контейнерные и вагонные отправки</li>
+                        <li><i class="fas fa-check"></i>Крытые и полувагоны</li>
+                        <li><i class="fas fa-check"></i>Изотермические вагоны</li>
+                        <li><i class="fas fa-check"></i>Сборные грузы LTL</li>
+                        <li><i class="fas fa-check"></i>Мультимодальные перевозки</li>
+                        <li><i class="fas fa-check"></i>Железнодорожные накладные</li>
+                    </ul>
+                    
+                    <a href="/quote" class="btn btn-primary mt-3">
+                        <i class="fas fa-calculator me-2"></i>Рассчитать стоимость
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customs -->
+    <section id="customs" class="service-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-file-alt service-icon"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="service-title">Таможенное оформление</h2>
+                    <p class="lead">Полное таможенное сопровождение импортно-экспортных операций с соблюдением всех требований законодательства.</p>
+                    
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>Оформление деклараций EPI, EX-1</li>
+                        <li><i class="fas fa-check"></i>Транзитные декларации T-1</li>
+                        <li><i class="fas fa-check"></i>Книжки Carnet TIR</li>
+                        <li><i class="fas fa-check"></i>Банковские гарантии</li>
+                        <li><i class="fas fa-check"></i>Сертификация и лицензирование</li>
+                        <li><i class="fas fa-check"></i>Акцизное сопровождение</li>
+                    </ul>
+                    
+                    <a href="/quote" class="btn btn-primary mt-3">
+                        <i class="fas fa-calculator me-2"></i>Рассчитать стоимость
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warehousing -->
+    <section id="warehousing" class="service-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="text-center">
+                        <i class="fas fa-warehouse service-icon"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <h2 class="service-title">Складские услуги</h2>
+                    <p class="lead">Современные складские комплексы с контролем качества, временным хранением и комплектацией грузов.</p>
+                    
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i>Контроль качества при приемке</li>
+                        <li><i class="fas fa-check"></i>Временное хранение грузов</li>
+                        <li><i class="fas fa-check"></i>Комплектация и упаковка</li>
+                        <li><i class="fas fa-check"></i>Температурные режимы</li>
+                        <li><i class="fas fa-check"></i>Обработка алкогольной продукции</li>
+                        <li><i class="fas fa-check"></i>Оклейка акцизными марками</li>
+                    </ul>
+                    
+                    <a href="/quote" class="btn btn-primary mt-3">
+                        <i class="fas fa-calculator me-2"></i>Рассчитать стоимость
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 mb-4">Нужна консультация по выбору услуг?</h2>
+                    <p class="lead mb-4">Наши специалисты помогут подобрать оптимальное решение для ваших логистических задач</p>
+                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                        <a href="/contact" class="btn btn-primary btn-lg">
+                            <i class="fas fa-phone me-2"></i>Получить консультацию
+                        </a>
+                        <a href="/quote" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-calculator me-2"></i>Рассчитать стоимость
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5><i class="fas fa-shipping-fast me-2"></i>StarCargo</h5>
+                    <p class="mb-4">Надежные логистические решения для вашего бизнеса. Доставка грузов по всему миру с гарантией качества и в срок.</p>
+                    <div class="contact-info">
+                        <i class="fas fa-phone" style="color: var(--secondary-color); margin-right: 10px; width: 20px;"></i>
+                        +7 (495) 123-45-67
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope" style="color: var(--secondary-color); margin-right: 10px; width: 20px;"></i>
+                        info@starcargo.com
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt" style="color: var(--secondary-color); margin-right: 10px; width: 20px;"></i>
+                        Москва, Россия
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Услуги</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#road" style="color: #bdc3c7; text-decoration: none;">Автоперевозки</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#air" style="color: #bdc3c7; text-decoration: none;">Авиаперевозки</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#sea" style="color: #bdc3c7; text-decoration: none;">Морские перевозки</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#rail" style="color: #bdc3c7; text-decoration: none;">Ж/д перевозки</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#customs" style="color: #bdc3c7; text-decoration: none;">Таможенное оформление</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Компания</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="/about" style="color: #bdc3c7; text-decoration: none;">О нас</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/contact" style="color: #bdc3c7; text-decoration: none;">Контакты</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/quote" style="color: #bdc3c7; text-decoration: none;">Получить предложение</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Поддержка</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="/tracking" style="color: #bdc3c7; text-decoration: none;">Отследить груз</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/contact" style="color: #bdc3c7; text-decoration: none;">Служба поддержки</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
