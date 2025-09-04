@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас - StarCargo</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1e3d59;
+            --secondary-color: #ff6b35;
+            --accent-color: #f5f0e1;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            padding-top: 76px;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 0;
+        }
+
+        .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-section:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .value-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary-color), #e55a2b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+            height: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .milestone {
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .milestone-year {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            font-weight: 500;
+            padding: 12px 30px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #e55a2b;
+            border-color: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #f8f9fa 100%);
+            padding: 60px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: block;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shipping-fast me-2"></i>StarCargo
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Услуги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tracking">Отслеживание</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/quote">Расчет стоимости</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                    <li class="breadcrumb-item active">О нас</li>
+                </ol>
+            </nav>
+            <h1 class="page-title">О компании StarCargo</h1>
+            <p class="lead">Надежный партнер в мире логистики уже более 10 лет</p>
+        </div>
+    </section>
+
+    <!-- About Company -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title text-start">Кто мы такие</h2>
+                    <p class="lead">StarCargo — ведущая логистическая компания, специализирующаяся на международных грузоперевозках и комплексных логистических решениях.</p>
+                    <p>За годы работы мы накопили огромный опыт в области транспортировки грузов различной сложности и специфики. Наша команда профессионалов обеспечивает безупречное качество услуг на всех этапах логистической цепочки.</p>
+                    <p>Мы понимаем, что каждый груз уникален, поэтому разрабатываем индивидуальные решения, учитывающие особенности вашего бизнеса и требования к перевозке.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-building" style="font-size: 10rem; color: var(--secondary-color); opacity: 0.8;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission and Values -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">Наша миссия и ценности</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h4>Наша миссия</h4>
+                        <p>Обеспечивать безупречное качество логистических услуг, способствуя развитию бизнеса наших клиентов через надежные и эффективные транспортные решения.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Надежность</h4>
+                        <p>Мы гарантируем выполнение всех обязательств в оговоренные сроки и обеспечиваем полную сохранность вашего груза на всем пути следования.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4>Инновации</h4>
+                        <p>Постоянно внедряем новые технологии и совершенствуем процессы для повышения качества обслуживания и оптимизации логистических решений.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Клиентоориентированность</h4>
+                        <p>Каждый клиент получает персональное внимание и индивидуальные решения, адаптированные под специфику его бизнеса.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>Экологичность</h4>
+                        <p>Используем транспорт высокого экологического класса и оптимизируем маршруты для снижения воздействия на окружающую среду.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Глобальность</h4>
+                        <p>Обширная партнерская сеть позволяет нам обеспечивать качественные услуги по всему миру в любой точке планеты.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <div class="stat-text">Лет опыта</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <div class="stat-text">Собственных автомобилей</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-item">
+                        <span class="stat-number">1000+</span>
+                        <div class="stat-text">Довольных клиентов</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <div class="stat-text">Стран доставки</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company History -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">История компании</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="milestone">
+                        <div class="milestone-year">2014</div>
+                        <h4>Основание компании</h4>
+                        <p>StarCargo была основана группой опытных логистов с целью создания надежной транспортной компании, ориентированной на высокое качество обслуживания.</p>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-year">2016</div>
+                        <h4>Расширение автопарка</h4>
+                        <p>Приобретение первых 20 современных грузовых автомобилей и развитие направления автомобильных перевозок по России и странам СНГ.</p>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-year">2018</div>
+                        <h4>Международная экспансия</h4>
+                        <p>Начало работы с международными авиа- и морскими перевозками. Получение всех необходимых лицензий для работы с таможенным оформлением.</p>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-year">2020</div>
+                        <h4>Цифровизация процессов</h4>
+                        <p>Внедрение современных IT-систем для отслеживания грузов и автоматизации документооборота. Запуск онлайн-платформы для клиентов.</p>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-year">2022</div>
+                        <h4>Складские комплексы</h4>
+                        <p>Открытие собственных складских комплексов с температурным контролем и современным оборудованием для обработки грузов.</p>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-year">2024</div>
+                        <h4>Лидер отрасли</h4>
+                        <p>StarCargo становится одной из ведущих логистических компаний региона с автопарком из более чем 50 единиц техники и штатом 200+ сотрудников.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="about-section">
+        <div class="container">
+            <h2 class="section-title">Наша команда</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4>Александр Петров</h4>
+                        <p class="text-muted">Генеральный директор</p>
+                        <p>Более 15 лет опыта в логистической отрасли. Руководит стратегическим развитием компании и построением партнерских отношений.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Елена Смирнова</h4>
+                        <p class="text-muted">Директор по операциям</p>
+                        <p>Отвечает за организацию перевозок и контроль качества услуг. Экспертные знания в области международных перевозок.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h4>Михаил Козлов</h4>
+                        <p class="text-muted">Руководитель отдела таможни</p>
+                        <p>Специалист по таможенному законодательству с опытом работы более 10 лет. Обеспечивает быстрое и корректное оформление документов.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="about-section">
+        <div class="container">
+            <h2 class="section-title">Лицензии и сертификаты</h2>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h5>ISO 9001:2015</h5>
+                        <p>Сертификат системы менеджмента качества</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h5>Лицензия ФТС</h5>
+                        <p>Таможенный представитель, таможенный перевозчик</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h5>Лицензия Минтранс</h5>
+                        <p>Перевозка грузов автомобильным транспортом</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h5>Страхование</h5>
+                        <p>Полис ответственности перевозчика на 10 млн рублей</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="about-section" style="background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%); color: white;">
+        <div class="container text-center">
+            <h2 class="display-5 mb-4">Готовы стать нашим партнером?</h2>
+            <p class="lead mb-4">Присоединяйтесь к более чем 1000 компаний, которые доверяют нам свои грузы</p>
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                <a href="/contact" class="btn btn-primary btn-lg">
+                    <i class="fas fa-handshake me-2"></i>Начать сотрудничество
+                </a>
+                <a href="/quote" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-calculator me-2"></i>Рассчитать стоимость
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5><i class="fas fa-shipping-fast me-2"></i>StarCargo</h5>
+                    <p class="mb-4">Надежные логистические решения для вашего бизнеса. Доставка грузов по всему миру с гарантией качества и в срок.</p>
+                    <div style="margin-bottom: 1rem;">
+                        <i class="fas fa-phone" style="color: var(--secondary-color); margin-right: 10px; width: 20px;"></i>
+                        +7 (495) 123-45-67
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <i class="fas fa-envelope" style="color: var(--secondary-color); margin-right: 10px; width: 20px;"></i>
+                        info@starcargo.com
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--secondary-color); margin-right: 10px; width: 20px;"></i>
+                        Москва, Россия
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Услуги</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="/services#road" style="color: #bdc3c7; text-decoration: none;">Автоперевозки</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/services#air" style="color: #bdc3c7; text-decoration: none;">Авиаперевозки</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/services#sea" style="color: #bdc3c7; text-decoration: none;">Морские перевозки</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/services#rail" style="color: #bdc3c7; text-decoration: none;">Ж/д перевозки</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/services#customs" style="color: #bdc3c7; text-decoration: none;">Таможенное оформление</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Компания</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="/about" style="color: #bdc3c7; text-decoration: none;">О нас</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/about#team" style="color: #bdc3c7; text-decoration: none;">Команда</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/about#certificates" style="color: #bdc3c7; text-decoration: none;">Сертификаты</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/contact" style="color: #bdc3c7; text-decoration: none;">Контакты</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/quote" style="color: #bdc3c7; text-decoration: none;">Получить предложение</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Поддержка</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="/tracking" style="color: #bdc3c7; text-decoration: none;">Отследить груз</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="/contact" style="color: #bdc3c7; text-decoration: none;">Служба поддержки</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Следите за нами</h5>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-light fs-4"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-light fs-4"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-light fs-4"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-light fs-4"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: #34495e;">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 StarCargo. Все права защищены.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="/privacy" class="text-light me-3" style="text-decoration: none;">Политика конфиденциальности</a>
+                    <a href="/terms" class="text-light" style="text-decoration: none;">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
